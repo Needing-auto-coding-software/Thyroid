@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Thyroid</string>
+    <string name = "selia_test">selia is testing git</string>
 </resources>
