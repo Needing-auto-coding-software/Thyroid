@@ -7,7 +7,7 @@
     tools:context=".PersonalPageActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/Avatar_PersonalPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -17,17 +17,17 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/UserName"
+        android:id="@+id/UserNameText_PersonalPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="用户名"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/Avatar_PersonalPage" />
 
     <Button
-        android:id="@+id/InformationCheckButton"
+        android:id="@+id/InformationCheckButton_PersonalPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -35,10 +35,10 @@
         app:backgroundTint="#8BA868"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserName" />
+        app:layout_constraintTop_toBottomOf="@+id/UserNameText_PersonalPage" />
 
     <Button
-        android:id="@+id/InformationChangeButton"
+        android:id="@+id/InformationChangeButton_PersonalPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -46,6 +46,6 @@
         app:backgroundTint="#8BA868"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InformationCheckButton" />
+        app:layout_constraintTop_toBottomOf="@+id/InformationCheckButton_PersonalPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

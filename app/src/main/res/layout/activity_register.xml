@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/UserNameText"
+        android:id="@+id/UserNameText_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/PasswordText"
+        android:id="@+id/PasswordText_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -28,10 +28,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/UserNameText_Register" />
 
     <EditText
-        android:id="@+id/PasswordConfirmText"
+        android:id="@+id/PasswordConfirmText_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -40,10 +40,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/PasswordText_Register" />
 
     <EditText
-        android:id="@+id/RealNameText"
+        android:id="@+id/RealNameText_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -52,7 +52,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordConfirmText" />
+        app:layout_constraintTop_toBottomOf="@+id/PasswordConfirmText_Register" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -62,16 +62,16 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RealNameText">
+        app:layout_constraintTop_toBottomOf="@+id/RealNameText_Register">
 
         <RadioButton
-            android:id="@+id/PersonalRadioButton"
+            android:id="@+id/PersonalRadioButton_Register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="个人用户" />
 
         <RadioButton
-            android:id="@+id/DoctorRadioButton"
+            android:id="@+id/DoctorRadioButton_Register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="医生用户" />
@@ -79,7 +79,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/RegisterButton"
+        android:id="@+id/RegisterButton_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"

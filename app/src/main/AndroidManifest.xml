@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Thyroid">
-        <activity android:name=".ReportCheckPage"></activity>
+        <activity android:name=".FunctionalPage_Patient"></activity>
+        <activity android:name=".FunctionPage_Doctor" />
+        <activity android:name=".ReportCheckPage" />
         <activity android:name=".ReportPage" />
         <activity android:name=".PersonalPageActivity" />
         <activity android:name=".RegisterActivity" />

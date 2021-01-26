@@ -7,7 +7,7 @@
     tools:context=".ReportPage">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/TakePhotoButton_ReportPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -15,10 +15,10 @@
         app:backgroundTint="#8BA868"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/Image_ReportPage" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/UploadButton_ReportPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -26,10 +26,10 @@
         app:backgroundTint="#8BA868"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/Album_ReportPage" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/Album_ReportPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -37,10 +37,10 @@
         app:backgroundTint="#8BA868"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/TakePhotoButton_ReportPage" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/Image_ReportPage"
         android:layout_width="258dp"
         android:layout_height="205dp"
         android:layout_marginTop="150dp"
