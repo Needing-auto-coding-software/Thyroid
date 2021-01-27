@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FunctionPage_Doctor">
+    tools:context=".FunctionalPage_Doctor">
 
     <ListView
         android:id="@+id/FunctionList_Doctor"

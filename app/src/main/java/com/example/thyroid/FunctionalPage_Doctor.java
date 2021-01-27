@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ReportCheckPage extends AppCompatActivity {
+public class FunctionalPage_Doctor extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_check_page);
+        setContentView(R.layout.activity_functional_page_doctor);
     }
 }
