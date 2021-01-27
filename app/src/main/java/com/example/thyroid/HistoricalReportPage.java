@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class FunctionPage_Doctor extends AppCompatActivity {
+public class HistoricalReportPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_function_page__doctor);
+        setContentView(R.layout.activity_historical_report_page);
     }
 }
