@@ -10,7 +10,7 @@
         android:id="@+id/UserNameText_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="70dp"
         android:ems="10"
         android:hint="用户名"
         android:inputType="textPersonName"
@@ -55,14 +55,14 @@
         app:layout_constraintTop_toBottomOf="@+id/PasswordConfirmText_Register" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/RadioGroup_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        app:layout_constraintTop_toBottomOf="@+id/PhoneNumberText_Register">
 
         <RadioButton
             android:id="@+id/PersonalRadioButton_Register"
@@ -87,10 +87,10 @@
         app:backgroundTint="#8BA868"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/RadioGroup_Register" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/PhoneNumberText_Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -111,6 +111,15 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RealNameText_Register" />
+        app:layout_constraintTop_toBottomOf="@+id/RealNameText_Register"
+        tools:ignore="Deprecated" />
+
+    <TextView
+        android:id="@+id/NoticeText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FA0A0A"
+        app:layout_constraintStart_toStartOf="@+id/PasswordConfirmText_Register"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordConfirmText_Register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

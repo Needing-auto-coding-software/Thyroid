@@ -53,4 +53,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LoginButton_Main" />
 
+    <RadioGroup
+        android:id="@+id/RadioGroup_Main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordText_Main">
+
+        <RadioButton
+            android:id="@+id/PersonalRadioButton_Main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人用户" />
+
+        <RadioButton
+            android:id="@+id/DoctorRadioButton_Main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="医生用户" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
