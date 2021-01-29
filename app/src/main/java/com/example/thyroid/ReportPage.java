@@ -11,4 +11,6 @@ public class ReportPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_page);
     }
+
+    //werid??
 }
