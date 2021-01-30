@@ -15,6 +15,5 @@ public class ViewReportPage extends AppCompatActivity {
         ActionBar actionBar =getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle("查看报告");
-        //图片
     }
 }
