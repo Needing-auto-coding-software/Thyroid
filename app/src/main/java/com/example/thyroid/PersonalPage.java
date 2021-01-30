@@ -1,5 +1,6 @@
 package com.example.thyroid;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +11,10 @@ import android.content.Intent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -24,7 +27,12 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
+
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class PersonalPage extends AppCompatActivity {
@@ -48,10 +56,13 @@ public class PersonalPage extends AppCompatActivity {
     TextView birthdayText;
     TextView phoneNumberText;
 
+    TimePickerView pvTime; //时间选择器对象
+
     PopupWindow popupWindow;
 
     Button confirmButton;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +82,13 @@ public class PersonalPage extends AppCompatActivity {
         passwordConfirm = passwordConfirmText.getText().toString();
 
         confirmButton = findViewById(R.id.ConfirmButton_Personal);
+
+        birthdayText.setShowSoftInputOnFocus(false); //选中不弹出软键盘
+        birthdayText.setOnClickListener(v -> {
+            initTimePicker(); //初始化时间选择器
+            pvTime.show();//显示时间选择
+        });
+
 
         confirmButton.setOnClickListener(v -> {
             userName = userNameText.getText().toString();
@@ -165,6 +183,34 @@ public class PersonalPage extends AppCompatActivity {
                     //do nothing - it will close on its own
                 })
                 .show();
+    }
+
+    private void initTimePicker() {
+
+        Calendar selectedDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(1900, 1, 1);//起始时间
+        Calendar endDate = Calendar.getInstance();
+        //endDate.set(2099, 12, 31);//结束时间
+        pvTime = new TimePickerView.Builder(this,
+                (date, v) -> birthdayText.setText(getTimes(date)))
+                //年月日时分秒 的显示与否，不设置则默认全部显示
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel("年", "月", "日", "时", "", "")
+                .isCenterLabel(true)
+                .setContentSize(21)
+                .setDate(selectedDate)
+                .setSubmitColor(Color.WHITE)//确定按钮文字颜色
+                .setCancelColor(Color.WHITE)//取消按钮文字颜色
+                .setRangDate(startDate, endDate)
+                .setDecorView(null)
+                .build();
+    }
+
+    //格式化时间
+    private String getTimes(Date date) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
     }
 
 }
