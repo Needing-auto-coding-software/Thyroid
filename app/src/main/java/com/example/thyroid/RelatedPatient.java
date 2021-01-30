@@ -8,31 +8,32 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class HistoricalReportPage extends AppCompatActivity {
+public class RelatedPatient extends AppCompatActivity {
+
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historical_report_page);
+        setContentView(R.layout.activity_related_patient);
 
         ActionBar actionBar =getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle("历史报告");
+        actionBar.setTitle("关联用户");
 
-        listView = findViewById(R.id.ReportList_HistoricalReportPage);
+        listView = findViewById(R.id.ListView_RelatedPatient);
         ArrayAdapter<String> adapter= new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, getData());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String string =(String) parent.getItemAtPosition(position);
-            Intent intent = new Intent(this,ViewReportPage.class);
-            intent.putExtra("reportId",string);
+            Intent intent = new Intent(this,HistoricalReportPage.class);
+            intent.putExtra("patient_name",string);
             startActivity(intent);
         });
     }
 
     private String[] getData(){
         //从数据库中取
-        return  new String[]{"报告1","报告2","报告3"};
+        return  new String[]{"用户1","用户2","用户3"};
     }
 }
