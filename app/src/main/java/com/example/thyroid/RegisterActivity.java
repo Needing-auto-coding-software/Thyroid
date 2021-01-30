@@ -1,27 +1,22 @@
 package com.example.thyroid;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     TimePickerView pvTime; //时间选择器对象
+    //取得ActionBar对象
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -54,6 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //调用hide方法，隐藏actionbar
+        ActionBar actionBar =getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
 
         userNameText = findViewById(R.id.UserNameText_Register);
         passwordText = findViewById(R.id.PasswordText_Register);
@@ -71,53 +72,44 @@ public class RegisterActivity extends AppCompatActivity {
 
         birthDateText.setShowSoftInputOnFocus(false); //选中不弹出软键盘
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userName = userNameText.getText().toString();
-                password = passwordText.getText().toString();
-                passwordConfirm = passwordConfirmText.getText().toString();
-                realName = realNameText.getText().toString();
-                birthDate = birthDateText.getText().toString();
-                phoneNumber = phoneNumberText.getText().toString();
+        registerButton.setOnClickListener(v -> {
+            userName = userNameText.getText().toString();
+            password = passwordText.getText().toString();
+            passwordConfirm = passwordConfirmText.getText().toString();
+            realName = realNameText.getText().toString();
+            birthDate = birthDateText.getText().toString();
+            phoneNumber = phoneNumberText.getText().toString();
 
-                if(userName.equals("") || password.equals("") || passwordConfirm.equals("")
-                    || realName.equals("") || birthDate.equals("") || phoneNumber.equals("")){
-                    AlertDialog();
-                }
+            if(userName.equals("") || password.equals("") || passwordConfirm.equals("")
+                || realName.equals("") || birthDate.equals("") || phoneNumber.equals("")){
+                AlertDialog();
             }
         });
 
-        birthDateText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initTimePicker(); //初始化时间选择器
-                pvTime.show();//显示时间选择
-            }
+        birthDateText.setOnClickListener(v -> {
+            initTimePicker(); //初始化时间选择器
+            pvTime.show();//显示时间选择
         });
 
+        //校验确认密码是否与密码一致
         passwordConfirmText.setFocusable(true);
         passwordConfirmText.setFocusableInTouchMode(true);
         passwordConfirmText.requestFocus();
         passwordConfirmText.requestFocusFromTouch();
 
-        passwordConfirmText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                // TODO Auto-generated method stub
-                if (hasFocus) {
-                    if(passwordConfirm != password){
+        passwordConfirmText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                if(!passwordConfirm.equals(password)){
+                    noticeText.setText("密码不正确");
+                }else{
+                    noticeText.setText("");
+                }
+            }else {
+                if(!passwordConfirm.equals("")){
+                    if(!passwordConfirm.equals(password)){
                         noticeText.setText("密码不正确");
                     }else{
                         noticeText.setText("");
-                    }
-                }else {
-                    if(passwordConfirm.equals("") == false){
-                        if(passwordConfirm != password){
-                            noticeText.setText("密码不正确");
-                        }else{
-                            noticeText.setText("");
-                        }
                     }
                 }
             }
@@ -131,15 +123,11 @@ public class RegisterActivity extends AppCompatActivity {
         new AlertDialog.Builder(RegisterActivity.this)
                 .setTitle("提示")
                 .setMessage("所填内容不得为空")
-                .setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //do nothing - it will close on its own
-                    }
+                .setNegativeButton("Close", (dialog, which) -> {
+                    //do nothing - it will close on its own
                 })
                 .show();
-
-    };
+    }
 
     public void DisableCopyAndPaste(TextView textView) {
         try {
@@ -177,12 +165,7 @@ public class RegisterActivity extends AppCompatActivity {
         Calendar endDate = Calendar.getInstance();
         //endDate.set(2099, 12, 31);//结束时间
         pvTime = new TimePickerView.Builder(this,
-                new TimePickerView.OnTimeSelectListener() {
-                    @Override
-                    public void onTimeSelect(Date date, View v) {
-                        birthDateText.setText(getTimes(date));
-                    }
-                })
+                (date, v) -> birthDateText.setText(getTimes(date)))
                 //年月日时分秒 的显示与否，不设置则默认全部显示
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setLabel("年", "月", "日", "时", "", "")
@@ -198,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //格式化时间
     private String getTimes(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }
 
