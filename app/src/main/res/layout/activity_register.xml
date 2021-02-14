@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/UserNameText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="用户名"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/PasswordText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="密码"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameText_Register" />
+
+    <EditText
+        android:id="@+id/PasswordConfirmText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="确认密码"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordText_Register" />
+
+    <EditText
+        android:id="@+id/RealNameText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="真实姓名"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordConfirmText_Register" />
+
+    <RadioGroup
+        android:id="@+id/genderRadioGroup_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RealNameText_Register">
+
+        <RadioButton
+            android:id="@+id/MaleRadioButton_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男" />
+
+        <RadioButton
+            android:id="@+id/FemaleRadioButton_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/IdentityRadioGroup_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailText_Register">
+
+        <RadioButton
+            android:id="@+id/PersonalRadioButton_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人用户" />
+
+        <RadioButton
+            android:id="@+id/DoctorRadioButton_Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="医生用户" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/RegisterButton_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="注册"
+        app:backgroundTint="#8BA868"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IdentityRadioGroup_Register" />
+
+    <EditText
+        android:id="@+id/PhoneNumberText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="电话号码"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BirthDateText_Register" />
+
+    <EditText
+        android:id="@+id/BirthDateText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="出生日期"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genderRadioGroup_Register"
+        tools:ignore="Deprecated" />
+
+    <EditText
+        android:id="@+id/EmailText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="邮箱"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PhoneNumberText_Register" />
+
+    <TextView
+        android:id="@+id/NoticeText_Register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FA0A0A"
+        app:layout_constraintStart_toStartOf="@+id/PasswordConfirmText_Register"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordConfirmText_Register" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

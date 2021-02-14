@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditReportPage">
+
+    <ImageView
+        android:id="@+id/Image_EditReportPage"
+        android:layout_width="241dp"
+        android:layout_height="181dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
+    <TextView
+        android:id="@+id/ResultText_EditReportPage"
+        android:layout_width="304dp"
+        android:layout_height="363dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Image_EditReportPage" />
+
+    <Button
+        android:id="@+id/ConfirmButton_EditReportPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="确认修改"
+        app:backgroundTint="#8BA868"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ResultText_EditReportPage" />
+</androidx.constraintlayout.widget.ConstraintLayout>

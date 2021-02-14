@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.thyroid">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Thyroid">
+        <activity android:name=".RelatedPatient"></activity>
+        <activity android:name=".HistoricalReportPage" />
+        <activity android:name=".ViewReportPage" />
+        <activity android:name=".FunctionalPage_Patient" />
+        <activity android:name=".FunctionalPage_Doctor" />
+        <activity android:name=".EditReportPage" />
+        <activity android:name=".ReportPage" />
+        <activity android:name=".PersonalPage" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
