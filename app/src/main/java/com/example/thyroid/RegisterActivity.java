@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.example.util.DateUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -110,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         birthDateText.setShowSoftInputOnFocus(false); //选中不弹出软键盘
 
+
         registerButton.setOnClickListener(v -> {
             userName = userNameText.getText().toString();
             password = passwordText.getText().toString();
@@ -120,9 +122,11 @@ public class RegisterActivity extends AppCompatActivity {
             Email = EmailText.getText().toString();
 
             if(userName.equals("") || password.equals("") || passwordConfirm.equals("")
-                || realName.equals("") || birthDate.equals("") || phoneNumber.equals("")){
+                    || realName.equals("") || birthDate.equals("") || phoneNumber.equals("") || Email.equals("") ||gender == 0|| identity == 0){
                 AlertDialog();
             }
+
+            connect_Register();
         });
 
         birthDateText.setOnClickListener(v -> {
@@ -185,10 +189,6 @@ public class RegisterActivity extends AppCompatActivity {
                     gender = 0;
                     break;
             }
-        });
-
-        registerButton.setOnClickListener(v -> {
-            connect_Register();
         });
 
 
@@ -264,48 +264,81 @@ public class RegisterActivity extends AppCompatActivity {
 
     //注册信息前后端连接
     private void connect_Register(){
-        /*if(TextUtils.isEmpty(userName)||TextUtils.isEmpty(realName)||TextUtils.isEmpty(password)
-                ||TextUtils.isEmpty(passwordConfirm)||TextUtils.isEmpty(birthDate)||TextUtils.isEmpty(phoneNumber)){
+        if(TextUtils.isEmpty(userName)||TextUtils.isEmpty(realName)||TextUtils.isEmpty(password)
+                ||TextUtils.isEmpty(passwordConfirm)||TextUtils.isEmpty(birthDate)||TextUtils.isEmpty(phoneNumber)||TextUtils.isEmpty(Email)
+                ||gender == 0|| identity == 0){
             Toast.makeText(RegisterActivity.this,"存在输入为空，注册失败",Toast.LENGTH_SHORT).show();
             return;
-        }*/
+        }
         if(!password.equals(passwordConfirm)){
             Toast.makeText(RegisterActivity.this,"两次密码不一致，注册失败",Toast.LENGTH_SHORT).show();
             return;
         }
 
-            //开启新线程
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        //初始化okHttpClient对象
-                        OkHttpClient client= new OkHttpClient();
+        //开启新线程
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //初始化okHttpClient对象
+                    OkHttpClient client= new OkHttpClient();
 
-                        //构建params类型请求体
-                        FormBody.Builder params = new FormBody.Builder();
-                        params.add("username",userName)
-                                .add("name",realName)
-                                .add("email",Email)
-                                .add("telephone",phoneNumber)
-                                .add("gender",""+gender)
-                                .add("age","") //目前age是空
-                                .add("usertype",""+identity)
-                                .add("password",password);
+                    //构建params类型请求体
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("username",userName)
+                            .add("name",realName)
+                            .add("email",Email)
+                            .add("telephone",phoneNumber)
+                            .add("gender",""+gender)
+                            .add("age",""+ DateUtil.getAge(DateUtil.parse(birthDate))) //目前age是空
+                            .add("usertype",""+identity)
+                            .add("password",password);
 
 
+                    //构建请求
+                    Request request = new Request.Builder()
+                            .url("http://192.168.31.226:8080/user/register") //192.168.31.226是我的IP地址
+                            .post(params.build())
+                            .build();
 
-                        //构建请求
-                        Request request = new Request.Builder()
-                                .url("http://192.168.31.226:8080/user/register") //我也不知道这个地址应该怎么写
-                                .post(params.build())
-                                .build();
+                    //返回数据
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    JSONObject jsonObject = new JSONObject(responseData);
 
-                        //返回数据
-                        Response response = client.newCall(request).execute();
-                        String responseData = response.body().string();
-                        JSONArray jsonArray = new JSONArray(responseData);
-                        for(int i=0;i<jsonArray.length();i++){
+                    String status = jsonObject.getString("status");
+
+                    if(status.equals("fail")){
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String errCode = data.getString("errCode");
+                        String errMsg = data.getString("errMsg");
+                        Log.d("status",status);
+                        Log.d("errCode",errCode);
+                        Log.d("errMsg",errMsg);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterActivity.this,"注册失败:"+errMsg,Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+                    else if(status.equals("success")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+
+                                //注册成功后，自动跳转到登录页面
+                                Intent jump_to_main = new Intent(RegisterActivity.this,MainActivity.class);
+                                startActivity(jump_to_main);
+                            }
+                        });
+                    }
+
+                        /*for(int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             Log.d("userName",jsonObject.getString("username"));
                             Log.d("realName",jsonObject.getString("name"));
@@ -314,36 +347,20 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d("gender","" + jsonObject.getInt("gender"));
                             Log.d("identity","" + jsonObject.getInt("usertype"));
                             Log.d("password",jsonObject.getString("password"));
+                        }*/
+
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(RegisterActivity.this,"注册失败",Toast.LENGTH_SHORT).show();
                         }
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(RegisterActivity.this,"注册成功！",Toast.LENGTH_SHORT).show();
-                                //注册成功后，自动跳转到登录页面
-
-                                Intent jump_to_main = new Intent(RegisterActivity.this,MainActivity.class);
-                                startActivity(jump_to_main);
-                                };
-                            }
-                        );
-
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(RegisterActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-
-
+                    });
                 }
-            }){
-
-            };
-
-
+            }
+        }).start();
     }
 
 }
