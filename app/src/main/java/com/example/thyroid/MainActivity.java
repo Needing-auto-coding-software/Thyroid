@@ -7,9 +7,17 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             userName = userNameText.getText().toString();
             password = passwordText.getText().toString();
 
+            /*这部分写在前后端连接里啦！
             if(userName.equals("") || password.equals("")){
                 AlertDialog();
             }else if(identity == 0){
@@ -60,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,FunctionalPage_Patient.class);
                 startActivity(intent);
             }
+            */
+
+            connect_Login();
+
         });
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -103,5 +116,83 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void connect_Login(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    //初始化OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
 
+                    //构建params类型请求体
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("username",userName)
+                            .add("password",password);
+
+                    //构建请求
+                    Request request = new Request.Builder()
+                            .url("http://192.168.31.226:8080/user/login")
+                            .post(params.build())
+                            .build();
+
+                    //返回数据
+                    Response response= client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    JSONObject jsonObject = new JSONObject(responseData);
+
+                    String status = jsonObject.getString("status");
+
+                    if(status.equals("fail")){
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String errCode = data.getString("errCode");
+                        String errMsg = data.getString("errMsg");
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run(){
+                                if(errCode.equals("10001")){
+                                    AlertDialog();
+                                    //Toast.makeText(MainActivity.this,"登录失败：用户名或密码不得为空",Toast.LENGTH_SHORT).show();
+                                }
+                                else if(errCode.equals("20002")){
+                                    Toast.makeText(MainActivity.this,"登录失败：" + errMsg,Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+                    else if(status.equals("success")){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(identity == 0){
+                                    AlertDialogChoose();
+                                }
+                                else if(identity == 1){
+                                    Intent intent = new Intent(MainActivity.this,FunctionalPage_Doctor.class);
+                                    startActivity(intent);
+                                }
+                                else if(identity == 2){
+                                    Intent intent = new Intent(MainActivity.this,FunctionalPage_Patient.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        }).start();
+
+        
+    }
 }
