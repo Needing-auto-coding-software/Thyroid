@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewReportPage">
@@ -9,9 +10,10 @@
     <TextView
         android:id="@+id/ResultText_ViewReportPage"
         android:layout_width="304dp"
-        android:layout_height="363dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="520dp"
+        android:layout_marginTop="2dp"
         android:text="TextView"
+        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +23,10 @@
         android:id="@+id/Image_ViewReportPage"
         android:layout_width="241dp"
         android:layout_height="181dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

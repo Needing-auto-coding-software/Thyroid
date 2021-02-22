@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/editbox_dropdown_light_frame" />
 
-    <TextView
+    <EditText
         android:id="@+id/ResultText_EditReportPage"
         android:layout_width="304dp"
         android:layout_height="363dp"

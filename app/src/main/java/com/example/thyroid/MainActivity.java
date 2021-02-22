@@ -171,10 +171,12 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 else if(identity == 1){
                                     Intent intent = new Intent(MainActivity.this,FunctionalPage_Doctor.class);
+                                    intent.putExtra("userName",userName);
                                     startActivity(intent);
                                 }
                                 else if(identity == 2){
                                     Intent intent = new Intent(MainActivity.this,FunctionalPage_Patient.class);
+                                    intent.putExtra("userName",userName);
                                     startActivity(intent);
                                 }
                             }
@@ -186,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(MainActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,"网络错误，登录失败",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
