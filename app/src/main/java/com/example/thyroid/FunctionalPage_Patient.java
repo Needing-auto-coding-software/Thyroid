@@ -8,13 +8,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.sql.Timestamp;
 
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class FunctionalPage_Patient extends AppCompatActivity {
     ListView listView;
@@ -56,9 +64,7 @@ public class FunctionalPage_Patient extends AppCompatActivity {
                     break;
                 }
                 case "历史报告": {
-                    Intent intent = new Intent(FunctionalPage_Patient.this,
-                            HistoricalReportPage.class);
-                    startActivity(intent);
+                    getHistoricalReport(userName);
                     break;
                 }
             }
@@ -69,4 +75,116 @@ public class FunctionalPage_Patient extends AppCompatActivity {
         return new String[]{"上传报告", "历史报告", "用户信息"};
     }
 
+
+    private void getHistoricalReport(String userName){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    //初始化OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient();
+
+                    //构建params类型请求体
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("username",userName);
+
+                    //构建请求
+                    Request request = new Request.Builder()
+                            .url("http://192.168.31.226:8080/case/getcases")
+                            .post(params.build())
+                            .build();
+
+                    //返回数据
+                    Response response= client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    JSONObject jsonObject = new JSONObject(responseData);
+
+                    String status = jsonObject.getString("status");
+
+                    if(status.equals("fail")){
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String errCode = data.getString("errCode");
+                        String errMsg = data.getString("errMsg");
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run(){
+                                Toast.makeText(FunctionalPage_Patient.this,"无法查看历史报告",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    else if(status.equals("success")){
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+                        int size = jsonArray.length();
+                        int[] arrayCaseId = new int[1000];
+                        String[] arrayUsername = new String[1000];
+                        String[] arrayCropImgPath = new String[1000];
+                        String[] arrayDetectionsPath = new String[1000];
+                        String[] arrayReportPath = new String[1000];
+                        String[] arrayCreateTime = new String[1000];
+
+                        //历史报告要保存以前所有的查询历史
+                        for(int i = size - 1; i >= 0 ; i--){
+                            JSONObject jsonObjectData = jsonArray.getJSONObject(i);
+                            int caseId = jsonObjectData.getInt("id");
+                            String username = jsonObjectData.getString("username");
+                            String cropImgPath = jsonObjectData.getString("cropImgPath");
+                            String detectionsPath = jsonObjectData.getString("detectionsPath");
+                            String reportPath = jsonObjectData.getString("reportPath");
+                            String createTime = jsonObjectData.getString("createTime");
+
+                            Log.d("userName",username);
+                            Log.d("cropImgPath",cropImgPath);
+                            Log.d("detectionsPath",detectionsPath);
+                            Log.d("reportPath",reportPath);
+                            Log.d("createTime",createTime);
+
+                            arrayCaseId[size - i - 1] = caseId;
+                            arrayUsername[size - i - 1] = username;
+                            arrayCropImgPath[size - i - 1] = cropImgPath;
+                            arrayDetectionsPath[size - i - 1] = detectionsPath;
+                            arrayReportPath[size - i - 1] = reportPath;
+                            arrayCreateTime[size - i - 1] = createTime;
+                        }
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                Intent intent = new Intent(FunctionalPage_Patient.this,
+                                        HistoricalReportPage.class);
+
+                                intent.putExtra("size",size);
+                                intent.putExtra("arrayUsername",arrayUsername);
+                                intent.putExtra("arrayCaseId",arrayCaseId);
+                                intent.putExtra("arrayCropImgPath",arrayCropImgPath);
+                                intent.putExtra("arrayDetectionsPath",arrayDetectionsPath);
+                                intent.putExtra("arrayReportPath",arrayReportPath);
+                                intent.putExtra("arrayCreateTime",arrayCreateTime);
+                                startActivity(intent);
+
+                            }
+                        });
+
+
+                    }
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(FunctionalPage_Patient.this,"网络错误，查询失败",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        }).start();
+
+
+    }
 }
