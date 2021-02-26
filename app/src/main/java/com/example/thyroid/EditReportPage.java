@@ -43,8 +43,8 @@ public class EditReportPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_report_page);
-        reportText = findViewById(R.id.ResultText_EditReportPage);
-        imageView = findViewById(R.id.Image_EditReportPage);
+        reportText = (EditText) findViewById(R.id.ResultText_EditReportPage);
+        imageView = (ImageView) findViewById(R.id.Image_EditReportPage);
         Button button = findViewById(R.id.ConfirmButton_EditReportPage);
 
         ActionBar actionBar =getSupportActionBar();
@@ -63,24 +63,11 @@ public class EditReportPage extends AppCompatActivity {
         Log.d("detectionsPath",detectionsPath);
         Log.d("reportPath",reportPath);
 
-
         //download_by_path(detectionsPath);
         download_by_path(reportPath,1);
         download_by_path(cropImgPath,0);
 
-        String inputText = load();
-        if(!TextUtils.isEmpty(inputText)){
-            reportText.setText(inputText);
-            reportText.setSelection(inputText.length());
-            Toast.makeText(EditReportPage.this,"修改成功",Toast.LENGTH_SHORT).show();
-        }
 
-        Intent static_intent = getIntent();
-        if (static_intent!=null){
-            //转为bitmap
-            Bitmap bitmapReceive = static_intent.getParcelableExtra("bitmap");
-            imageView.setImageBitmap(bitmapReceive);
-        }
     }
 
     //type=0为图片文件，type=1为文本文件
@@ -111,7 +98,13 @@ public class EditReportPage extends AppCompatActivity {
                         String responseData = response.body().string();
                         Log.d("下载报告",responseData);
 
-                        show_text(responseData);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                show_text(responseData);
+                            }
+                        });
+
                     }else if(type == 0){
                         //inputStream存储图片输入流
                         InputStream inputStream = response.body().byteStream();
@@ -168,29 +161,5 @@ public class EditReportPage extends AppCompatActivity {
         return outStream.toByteArray();
     }
 
-    public String load(){
-        FileInputStream in = null;
-        BufferedReader reader = null;
-        StringBuilder content = new StringBuilder();
-        try{
-            in = openFileInput("data");
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while((line = reader.readLine()) != null){
-                content.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(reader != null) {
-                try{
-                    reader.close();
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return content.toString();
-    }
 
 }

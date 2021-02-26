@@ -102,13 +102,20 @@ public class ViewReportPage extends AppCompatActivity {
                         String responseData = response.body().string();
                         Log.d("下载报告",responseData);
 
-                        show_text(responseData);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                show_text(responseData);
+                            }
+                        });
+
                     }else if(type == 0){
                         //inputStream存储图片输入流
                         InputStream inputStream = response.body().byteStream();
                         Log.d("下载图片",inputStream.toString());
 
                         show_image(inputStream);
+
                     }
 
 
