@@ -75,7 +75,7 @@ public class FunctionalPage_Patient extends AppCompatActivity {
         return new String[]{"上传报告", "历史报告", "用户信息"};
     }
 
-
+    //查看历史报告
     private void getHistoricalReport(String userName){
         new Thread(new Runnable() {
             @Override
@@ -110,7 +110,7 @@ public class FunctionalPage_Patient extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run(){
-                                Toast.makeText(FunctionalPage_Patient.this,"无法查看历史报告",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FunctionalPage_Patient.this,"您还未上传过报告",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
