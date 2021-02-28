@@ -297,7 +297,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/user/register") //192.168.31.226是我的IP地址
+                            .url("http://10.136.189.11:8080/user/register") //要改成自己的ip地址
                             .post(params.build())
                             .build();
 

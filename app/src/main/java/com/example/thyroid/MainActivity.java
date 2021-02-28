@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/user/login")
+                            .url("http://10.136.189.11:8080/user/login")
                             .post(params.build())
                             .build();
 

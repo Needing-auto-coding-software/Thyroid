@@ -280,7 +280,7 @@ public class ReportPage extends AppCompatActivity {
 
 
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/file/upload")
+                            .url("http://10.136.189.11:8080/file/upload")
                             .post(requestBody.build())
                             .build();
 
@@ -356,7 +356,7 @@ public class ReportPage extends AppCompatActivity {
 
 
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/case/addcase")
+                            .url("http://10.136.189.11:8080/case/addcase")
                             .post(requestBody.build())
                             .build();
 

@@ -89,7 +89,7 @@ public class ViewReportPage extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/file/downloadbypath")
+                            .url("http://10.136.189.11:8080/file/downloadbypath")
                             .post(params.build())
                             .build();
 
@@ -157,7 +157,7 @@ public class ViewReportPage extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/file/downloadbycaseid")
+                            .url("http://10.136.189.11:8080/file/downloadbycaseid")
                             .post(params.build())
                             .build();
 

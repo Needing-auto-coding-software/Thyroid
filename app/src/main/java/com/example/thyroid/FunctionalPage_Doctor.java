@@ -53,7 +53,10 @@ public class FunctionalPage_Doctor extends AppCompatActivity {
                     break;
                 }
                 case "关联用户": {
-                    addDPRelation("doc","swj",2);
+                    Intent intent = new Intent(FunctionalPage_Doctor.this,
+                            AddOrSearchDPRelation.class);
+                    intent.putExtra("docUsername",userName);
+                    startActivity(intent);
                     break;
                 }
                 case "用户信息": {
@@ -70,73 +73,4 @@ public class FunctionalPage_Doctor extends AppCompatActivity {
         return new String[]{"上传报告","关联用户","用户信息"};
     }
 
-    private void addDPRelation(String docUsername,String patUsername,int type){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    //初始化OkHttpClient对象
-                    OkHttpClient client = new OkHttpClient();
-
-                    //构建params类型请求体
-                    FormBody.Builder params = new FormBody.Builder();
-                    params.add("doctor",docUsername)
-                          .add("patient",patUsername)
-                          .add("type",""+type);
-
-                    //构建请求
-                    Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/dp/adddp")
-                            .post(params.build())
-                            .build();
-
-                    //返回数据
-                    Response response= client.newCall(request).execute();
-                    String responseData = response.body().string();
-                    JSONObject jsonObject = new JSONObject(responseData);
-
-                    String status = jsonObject.getString("status");
-
-                    if(status.equals("fail")){
-                        JSONObject data = jsonObject.getJSONObject("data");
-                        String errCode = data.getString("errCode");
-                        String errMsg = data.getString("errMsg");
-
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run(){
-                                Toast.makeText(FunctionalPage_Doctor.this,"无法关联用户，未知错误",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-
-                    else if(status.equals("success")){
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(FunctionalPage_Doctor.this,
-                                        RelatedPatient.class);
-
-                                intent.putExtra("patient",patUsername);
-
-                                startActivity(intent);
-                            }
-                        });
-                    }
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(FunctionalPage_Doctor.this,"网络错误，关联用户失败",Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-        }).start();
-
-    }
 }

@@ -90,7 +90,7 @@ public class FunctionalPage_Patient extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://192.168.31.226:8080/case/getcases")
+                            .url("http://10.136.189.11:8080/case/getcases")
                             .post(params.build())
                             .build();
 
@@ -184,7 +184,6 @@ public class FunctionalPage_Patient extends AppCompatActivity {
                 }
             }
         }).start();
-
 
     }
 }
