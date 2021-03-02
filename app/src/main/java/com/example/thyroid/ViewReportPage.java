@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class ViewReportPage extends AppCompatActivity {
         setContentView(R.layout.activity_view_report_page);
 
         reportText = (TextView) findViewById(R.id.ResultText_ViewReportPage);
+        reportText.setMovementMethod(new ScrollingMovementMethod());
         imageView = (ImageView) findViewById(R.id.Image_ViewReportPage);
 
         Intent from_ReportPage = getIntent();
