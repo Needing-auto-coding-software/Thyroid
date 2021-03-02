@@ -51,8 +51,6 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
             }
 
         });
-
-
     }
 
     private void AlertDialog()
@@ -81,13 +79,14 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://" + MainActivity.serviceIP + "/user/getbyusername")
+                            .url("http://" + MainActivity.serviceIP + ":8080/user/getbyusername")
                             .post(params.build())
                             .build();
 
                     //返回数据
                     Response response= client.newCall(request).execute();
                     String responseData = response.body().string();
+                    System.out.println(responseData);
                     JSONObject jsonObject = new JSONObject(responseData);
 
                     String status = jsonObject.getString("status");
@@ -110,7 +109,6 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
                         addDPRelation(docUsername,patUsername,2);
 
                     }
-
                 }catch(Exception e){
                     e.printStackTrace();
                     runOnUiThread(new Runnable() {
@@ -122,7 +120,6 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
 
 
@@ -140,11 +137,14 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
                             .add("patient",patUsername)
                             .add("type",""+type);
 
+
                     //构建请求
                     Request request = new Request.Builder()
                             .url("http://" + MainActivity.serviceIP + ":8080/dp/adddp")
                             .post(params.build())
                             .build();
+
+                    System.out.println("构建请求成功");
 
                     //返回数据
                     Response response= client.newCall(request).execute();
@@ -273,7 +273,5 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
                 }
             }
         }).start();
-
     }
-
 }

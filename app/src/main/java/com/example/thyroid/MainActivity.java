@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String serviceIP = "10.135.150.188";
+    public static String serviceIP = "10.135.117.143";
 
     Button registerButton;
     Button loginButton;
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.137.65.149:8080/user/login")
+                            .url("http://" + serviceIP + ":8080/user/login")
                             .post(params.build())
                             .build();
 
