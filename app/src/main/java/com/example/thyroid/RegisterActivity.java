@@ -1,10 +1,5 @@
 package com.example.thyroid;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,17 +10,20 @@ import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.textclassifier.TextLinks;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bigkoo.pickerview.TimePickerView;
 import com.example.util.DateUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -35,10 +33,7 @@ import java.util.Date;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-
-
 
 import static com.example.thyroid.R.id.BirthDateText_Register;
 
@@ -297,7 +292,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/user/register") //要改成自己的ip地址
+                            .url("http://" + MainActivity.serviceIP + ":8080/user/register") //要改成自己的ip地址
                             .post(params.build())
                             .build();
 

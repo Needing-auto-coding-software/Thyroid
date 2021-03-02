@@ -1,8 +1,5 @@
 package com.example.thyroid;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,18 +7,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.sql.Timestamp;
-
 import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class FunctionalPage_Patient extends AppCompatActivity {
@@ -90,7 +84,7 @@ public class FunctionalPage_Patient extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/case/getcases")
+                            .url("http://" + MainActivity.serviceIP + ":8080/case/getcases")
                             .post(params.build())
                             .build();
 

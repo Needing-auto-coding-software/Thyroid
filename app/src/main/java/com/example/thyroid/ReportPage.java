@@ -1,7 +1,6 @@
 package com.example.thyroid;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -22,17 +21,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -182,6 +180,7 @@ public class ReportPage extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private String handleImageOnKitKat(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
@@ -280,7 +279,7 @@ public class ReportPage extends AppCompatActivity {
 
 
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/file/upload")
+                            .url("http://" + MainActivity.serviceIP + ":8080/file/upload")
                             .post(requestBody.build())
                             .build();
 
@@ -356,7 +355,7 @@ public class ReportPage extends AppCompatActivity {
 
 
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/case/addcase")
+                            .url("http://" + MainActivity.serviceIP + ":8080/case/addcase")
                             .post(requestBody.build())
                             .build();
 

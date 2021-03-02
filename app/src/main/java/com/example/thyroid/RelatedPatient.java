@@ -1,14 +1,14 @@
 package com.example.thyroid;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,7 +76,7 @@ public class RelatedPatient extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/case/getcases")
+                            .url("http://" + MainActivity.serviceIP + ":8080/case/getcases")
                             .post(params.build())
                             .build();
 

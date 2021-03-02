@@ -1,13 +1,13 @@
 package com.example.thyroid;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,7 +81,7 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/user/getbyusername")
+                            .url("http://" + MainActivity.serviceIP + "/user/getbyusername")
                             .post(params.build())
                             .build();
 
@@ -142,7 +142,7 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/dp/adddp")
+                            .url("http://" + MainActivity.serviceIP + ":8080/dp/adddp")
                             .post(params.build())
                             .build();
 
@@ -204,7 +204,7 @@ public class AddOrSearchDPRelation extends AppCompatActivity {
 
                     //构建请求
                     Request request = new Request.Builder()
-                            .url("http://10.136.189.11:8080/dp/docgetdp")
+                            .url("http://" + MainActivity.serviceIP + ":8080/dp/docgetdp")
                             .post(params.build())
                             .build();
 
