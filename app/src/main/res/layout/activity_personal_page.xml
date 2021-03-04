@@ -1,204 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.thyroid.PersonalPage">
+    tools:context="com.example.thyroid.PersonalPage"
+    android:orientation="vertical"
+    android:background="@color/gray3">
 
-    <ImageView
-        android:id="@+id/Avatar_PersonalPage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/portrait"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
-        android:text="点击修改图像"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Avatar_PersonalPage" />
-
-    <Button
-        android:id="@+id/ConfirmButton_Personal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="确定修改"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <!--    头像-->
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="425dp"
-        android:layout_height="443dp"
-        android:layout_marginBottom="30dp"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/portrait_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:background="@color/white">
 
-        <!--账号-->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.example.widget.RoundImage
+            android:id="@+id/Avatar_PersonalPage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/portrait"/>
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="用户名    ：" />
-
-            <EditText
-                android:id="@+id/UserNameText_Personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="输入用户名"
-                android:maxLength="11" />
-
-
-        </LinearLayout>
-
-        <!--密码-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="密码        ：" />
-
-            <EditText
-                android:id="@+id/PasswordText_Personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入密码"
-                android:inputType="textPassword" />
-        </LinearLayout>
-
-        <!--确认密码-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="确认密码：" />
-
-            <EditText
-                android:id="@+id/PasswordConfirmText_Personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入确认密码"
-                android:inputType="textPassword" />
-        </LinearLayout>
-
-        <!--真实姓名-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="真实姓名：" />
-
-            <EditText
-                android:id="@+id/RealNameText_Personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="输入真实姓名"
-                android:maxLength="11" />
-
-        </LinearLayout>
-        <!--手机号码-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="手机号码：" />
-
-            <EditText
-                android:id="@+id/PhoneNumber_Personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请输入正确手机号码"
-                android:inputType="phone"
-                android:maxLength="11" />
-
-        </LinearLayout>
-
-        <!--出生日期-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="出生日期：" />
-
-            <EditText
-                android:id="@+id/Birthday_Personal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="输入出生日期" />
-
-        </LinearLayout>
+            android:text="点击修改头像"
+            android:textColor="@color/gray9"
+            android:textSize="12sp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>
+    <!--    编辑界面，此处可以写成一个ItemGroup上传至com上-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.example.widget.ItemGroup
+            android:id="@+id/UserName_Personal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:edt_hint_content="修改用户名"
+            app:title="用户名" />
+        <com.example.widget.ItemGroup
+            android:id="@+id/Password_Personal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:edt_hint_content="修改密码"
+            app:title="密码" />
+        <com.example.widget.ItemGroup
+            android:id="@+id/Realname_Personal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:edt_hint_content="修改真实姓名"
+            app:title="真实姓名" />
+        <com.example.widget.ItemGroup
+            android:id="@+id/Birthday_Personal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:edt_hint_content="修改生日"
+            app:title="生日" />
+        <com.example.widget.ItemGroup
+            android:id="@+id/Phone_Personal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:edt_hint_content="修改生日"
+            app:title="电话号码" />
+        <com.example.widget.ItemGroup
+            android:id="@+id/Email_Personal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:edt_hint_content="修改邮箱"
+            app:title="邮箱" />
+    </LinearLayout>
+</LinearLayout>

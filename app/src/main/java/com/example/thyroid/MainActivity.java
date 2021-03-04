@@ -21,7 +21,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String serviceIP = "10.135.117.143";
+    public static String serviceIP = "";
 
     Button registerButton;
     Button loginButton;
@@ -58,20 +58,6 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             userName = userNameText.getText().toString();
             password = passwordText.getText().toString();
-
-            /*这部分写在前后端连接里啦！
-            if(userName.equals("") || password.equals("")){
-                AlertDialog();
-            }else if(identity == 0){
-                AlertDialogChoose();
-            }else if(identity == 1){
-                Intent intent = new Intent(MainActivity.this,FunctionalPage_Doctor.class);
-                startActivity(intent);
-            }else if(identity == 2){
-                Intent intent = new Intent(MainActivity.this,FunctionalPage_Patient.class);
-                startActivity(intent);
-            }
-            */
 
             connect_Login();
 
