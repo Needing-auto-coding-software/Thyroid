@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="olivine">#8CB369</color>
     <color name="asparagus">#78A352</color>
+    <color name="gray9">#5A5A59</color>
+    <color name="gray3">#E6E6E5</color>
     <color name="item_group_title">#FF000000</color>
     <color name="item_group_edt">#FF000000</color>
     <color name="item_group_divider">#FF000000</color>

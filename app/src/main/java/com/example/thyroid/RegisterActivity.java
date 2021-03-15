@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -116,9 +117,22 @@ public class RegisterActivity extends AppCompatActivity {
             phoneNumber = phoneNumberText.getText().toString();
             Email = EmailText.getText().toString();
 
-            if(userName.equals("") || password.equals("") || passwordConfirm.equals("")
-                    || realName.equals("") || birthDate.equals("") || phoneNumber.equals("") || Email.equals("") ||gender == 0|| identity == 0){
-                AlertDialog();
+            Email = EmailText.getText().toString();
+            String email = "123";
+            String regexPhone = "[1][3,5,7,8][0-9]\\d{8}";
+            Pattern patternPhone = Pattern.compile(regexPhone);
+            String regexEmail = "/w+([-+.]/w+)*@/w+([-.]/w+)*/./w+([-.]/w+)*";
+            Pattern patternEmail = Pattern.compile(regexEmail);
+
+            if (userName.equals("") || password.equals("") || passwordConfirm.equals("")
+                    || realName.equals("") || birthDate.equals("") || phoneNumber.equals("")) {
+                AlertDialog("所填内容不得为空");
+            } else if (!patternPhone.matcher(phoneNumber).matches()) {
+                AlertDialog("手机号码不正确");
+            } else if (!patternEmail.matcher(email).matches()) {
+                AlertDialog("邮箱不正确");
+            } else if (!passwordConfirm.equals(password)) {
+                AlertDialog("两次输入密码不一致");
             }
 
             connect_Register();
@@ -189,12 +203,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void AlertDialog()
-    {
+    private void AlertDialog(String message) {
         //Alert Dialog
         new AlertDialog.Builder(RegisterActivity.this)
                 .setTitle("提示")
-                .setMessage("所填内容不得为空")
+                .setMessage(message)
                 .setNegativeButton("Close", (dialog, which) -> {
                     //do nothing - it will close on its own
                 })
