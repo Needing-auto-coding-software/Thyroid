@@ -35,10 +35,11 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="请输入患者用户名"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SearchPatientButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

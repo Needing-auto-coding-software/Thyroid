@@ -1,26 +1,19 @@
 package com.example.thyroid;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class FunctionalPage_Doctor extends AppCompatActivity {
 
     ListView listView;
+    TextView textView;
 
     int identity = 1;
 
@@ -36,6 +29,9 @@ public class FunctionalPage_Doctor extends AppCompatActivity {
         ActionBar actionBar =getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle("Welcome!");
+
+        textView = findViewById(R.id.textView);
+        textView.setText(userName);
 
         listView= findViewById(R.id.FunctionList_Doctor);
         ArrayAdapter<String> adapter= new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, getData());

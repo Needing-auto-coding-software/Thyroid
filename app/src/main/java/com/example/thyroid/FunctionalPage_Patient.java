@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +21,7 @@ import okhttp3.Response;
 
 public class FunctionalPage_Patient extends AppCompatActivity {
     ListView listView;
+    TextView textView;
 
     int identity = 2;
 
@@ -35,6 +37,9 @@ public class FunctionalPage_Patient extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle("Welcome!");
+
+        textView = findViewById(R.id.textView);
+        textView.setText(userName);
 
         listView = findViewById(R.id.FunctionList_Patient);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, getData());
